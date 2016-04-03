@@ -1,4 +1,4 @@
-import AlexaSkill from './AlexaSkill';
+import AlexaSkill from 'AlexaSkill';
 
 class OurGroceriesSkill extends AlexaSkill {
   constructor(appId, ourGroceriesClient, ourGroceriesUserName, ourGroceriesPassword) {
