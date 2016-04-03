@@ -88,6 +88,15 @@ class OurGroceriesSkill extends AlexaSkill {
     var candidates = allLists.filter((item) => item.matchName.indexOf(listName) === 0 || listName.indexOf(item.matchName) === 0);
     return candidates.length > 0 ? candidates[0] : null;
   }
+
+  ListLists(intent, session, response) {
+    this.AuthenticateAndGetLists(response, (lists)=>{
+      if (lists) {
+        var tellResponse = "Here are the lists I found:" + lists.map((item) => item.name).join(', ');
+        response.tell(tellResponse);
+      }
+    });
+  }
 }
 
 
@@ -109,6 +118,9 @@ OurGroceriesSkill.prototype.intentHandlers = {
     } else {
       this.ListItemsOnList(intent.slots.listName.value, intent, session, response);
     }
+  },
+  ListLists: function(intent, session, response) {
+    this.ListLists(intent, session, response);
   }
 }
 

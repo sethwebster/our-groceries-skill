@@ -1,6 +1,6 @@
 {
   "name": "our-groceries-skill",
-  "version": "0.1.01-pre",
+  "version": "0.1.02-pre",
   "description": "An Amazon Alexa Skill for Our Groceries",
   "main": "our-groceries-skill.js",
   "scripts": {
