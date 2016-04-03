@@ -1,6 +1,6 @@
 {
   "name": "our-groceries-skill",
-  "version": "0.1.0-pre",
+  "version": "0.1.01-pre",
   "description": "An Amazon Alexa Skill for Our Groceries",
   "main": "our-groceries-skill.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "gulp-sourcemaps": "^1.6.0"
   },
   "dependencies": {
-    "alexa-skill-js": "0.1.0-pre",
+    "alexa-skill-js": "0.1.01-pre",
     "gulp": "^3.9.1"
   },
   "repository": {
