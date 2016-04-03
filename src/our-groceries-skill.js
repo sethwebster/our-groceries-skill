@@ -1,24 +1,32 @@
 import AlexaSkill from 'alexa-skill-js';
 
+var constructed = false;
+
 class OurGroceriesSkill extends AlexaSkill {
   constructor(appId, ourGroceriesClient, ourGroceriesUserName, ourGroceriesPassword) {
-    console.log("Loading skill...");
-    super(appId);
-    this.client = ourGroceriesClient;
-    this.userName = ourGroceriesUserName;
-    this.password = ourGroceriesPassword;
-    if (!this.client) {
-      throw "An OurGroceriesClient must be supplied";
-    }
+    if (!constructed) {
+      constructed = true;
+      console.log("Loading skill...");
+      super(appId);
+      this.client = ourGroceriesClient;
+      this.userName = ourGroceriesUserName;
+      this.password = ourGroceriesPassword;
+      if (!this.client) {
+        throw "An OurGroceriesClient must be supplied";
+      }
 
-    this.eventHandlers = this.eventHandlers || {};
-    this.eventHandlers.onLaunch = function(launchRequest, session, response) {
-      var welcome  = "Welcome to Our Groceries for Echo." +
-                     "You may add items to your Our Groceries lists just by asking Alexa. For example, say, Add apples to my Trader Joe's list."
-        , reprompt = "Try it now, or say cancel.";                 
+      this.eventHandlers = this.eventHandlers || {};
+      this.eventHandlers.onLaunch = function(launchRequest, session, response) {
+        var welcome  = "Welcome to Our Groceries for Echo." +
+                       "You may add items to your Our Groceries lists just by asking Alexa. For example, say, Add apples to my Trader Joe's list."
+          , reprompt = "Try it now, or say cancel.";                 
 
-      response.ask(welcome, reprompt);
-    }
+        response.ask(welcome, reprompt);
+      }
+
+    } else {
+      debugger;
+    }  
   }
   
   AuthenticateAndGetLists(response, callback) {
@@ -107,8 +115,7 @@ class OurGroceriesSkill extends AlexaSkill {
 
 
 OurGroceriesSkill.prototype.intentHandlers = {
-  AddItem: function(intent, session, response) {
-    var skill = new OurGroceriesSkill()
+  AddItem: function(intent, session, response) {   
     var reprompt = "Say something like add apples to my trader joe's list";
     if (!intent.slots.itemName) {
       response.ask("It doesn't seem like you told me what item you want to add to the list", reprompt);
