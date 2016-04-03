@@ -67,9 +67,15 @@ class OurGroceriesSkill extends AlexaSkill {
       var list = this.FindList(listName, lists);
       if (list) {
         this.client.getList(list.id, (result) => {
-          var tellResponse = `Here's what's on your ${result.response.list.name} list: ` + result.response.list.items.filter((item)=>{
+          var tellResponse = "";
+          var activeItems = result.response.list.items.filter((item)=>{
             return !item.crossedOff;
-          }).map((item)=>item.value).join(', ');
+          });
+          if (activeItems.length > 0) {
+            tellResponse = `Here's what's on your ${result.response.list.name} list: ` + activeItems.map((item)=>item.value).join(', ');
+          } else {
+            tellResponse = `Your ${result.response.list.name} list is empty`;
+          }
           response.tell(tellResponse);
         });
       } else {
